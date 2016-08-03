@@ -1,0 +1,87 @@
+server:
+  port: 0
+
+info:
+  component: Email MicroService
+
+
+logging:
+  level:
+    root: WARN
+    co.agileventure: INFO
+    
+#==============================
+#  JMS/ ACTIVEMQ 
+#==============================
+mensajes:
+    queue:
+         eventosestudianteadmitido: eventosestudianteadmitido
+         eventosnotificacioncartera: eventosnotificacioncartera
+         eventosnotificacioncarteramasivo: eventosnotificacioncarteramasivo
+         eventosestudianteadmitidomasivo: eventosestudianteadmitidomasivo
+#===================================    
+                    
+spring:
+    datasource:
+        url: jdbc:sqlserver://192.168.1.20\ZABUD:1433;database=email;user=sa;password=root;
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#        url: jdbc:mysql://localhost/email
+#        driver-class-name:  com.mysql.jdbc.Driver
+        
+# Username and password
+#        username: root
+#        password: root
+
+# Keep the connection alive if idle for a long time (needed in production)
+#        testWhileIdle: true
+#        validationQuery: SELECT 1
+
+    
+# ===============================
+# = JPA / HIBERNATE
+# ===============================
+
+# Use spring.jpa.properties.* for Hibernate native properties (the prefix is
+# stripped before adding them to the entity manager).
+
+# Show or not log for each sql query
+    jpa:
+        show-sql: true
+
+# Hibernate ddl auto (create, create-drop, update): with "update" the database
+# schema will be automatically updated accordingly to java entities found in
+# the project
+        hibernate:
+            ddl-auto: update
+
+# Naming strategy
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+
+# Allows Hibernate to generate SQL optimized for a particular DBMS for MySQL:MySQL5Dialect - SQLserver:SQLServerDialect
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.SQLServerDialect
+                
+                
+#configuración de mail server
+#spring.mail.host:localhost
+#spring.mail.username:
+
+
+    mail:
+         host: smtp.zabud.co
+         username: notificaciones@zabud.co
+         password: NotiZabud*2015
+         port: 25
+      
+#         properties:
+#                  mail:
+#                    smtp:
+#                      starttls:
+#                          enable: true
+                          
+                          
+                          
+    velocity:
+        resource-loader-path: classpath:/templates
+        cache: false
